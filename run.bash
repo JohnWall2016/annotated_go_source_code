@@ -5,7 +5,7 @@
 
 set -e
 
-# 在make.bat中已经设置了新环境的路径, 这里已经是新编译的go了
+# 在make.bash中已经设置了新环境的路径, 这里已经是新编译的go了
 eval $(go env)
 export GOROOT   # the api test requires GOROOT to be set.
 

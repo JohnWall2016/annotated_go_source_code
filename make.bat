@@ -76,9 +76,11 @@ set GOROOT=%GOROOT_BOOTSTRAP%
 set GOOS=
 set GOARCH=
 set GOBIN=
+:: 编译发布程序
 "%GOROOT_BOOTSTRAP%\bin\go" build -o cmd\dist\dist.exe .\cmd\dist
 endlocal
 if errorlevel 1 goto fail
+:: 设置新的go运行环境的环境变量
 .\cmd\dist\dist env -w -p >env.bat
 if errorlevel 1 goto fail
 call env.bat
@@ -103,6 +105,7 @@ if x%4==x--no-banner set buildall=%buildall% --no-banner
 :: Run dist bootstrap to complete make.bash.
 :: Bootstrap installs a proper cmd/dist, built with the new toolchain.
 :: Throw ours, built with Go 1.4, away after bootstrap.
+:: 重新引导编译go环境
 .\cmd\dist\dist bootstrap %vflag% %buildall% 
 if errorlevel 1 goto fail
 del .\cmd\dist\dist.exe

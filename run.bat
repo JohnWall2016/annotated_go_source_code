@@ -33,12 +33,14 @@ echo.
 set GOROOT_FINAL=
 
 :: get CGO_ENABLED
+:: 在make.bat中已经设置了新环境的路径, 这里已经是新编译的go了.
 go env > env.bat
 if errorlevel 1 goto fail
 call env.bat
 del env.bat
 echo.
 
+:: 对新环境进行测试
 go tool dist test
 if errorlevel 1 goto fail
 echo.

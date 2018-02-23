@@ -1,0 +1,6 @@
+
+cmd/cgo/zdefaultcc.go
+
+cmd/go/internal/cfg/zdefaultcc.go
+
+cmd/internal/objabi/zbootstrap.go

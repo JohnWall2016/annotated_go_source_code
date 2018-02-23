@@ -5,6 +5,7 @@
 
 set -e
 
+# 在make.bat中已经设置了新环境的路径, 这里已经是新编译的go了
 eval $(go env)
 export GOROOT   # the api test requires GOROOT to be set.
 
@@ -44,4 +45,5 @@ if ulimit -T &> /dev/null; then
 	[ "$(ulimit -H -T)" = "unlimited" ] || ulimit -S -T $(ulimit -H -T)
 fi
 
+# 对新环境进行测试
 exec go tool dist test -rebuild "$@"

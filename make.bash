@@ -162,8 +162,10 @@ if [ "$GOROOT_BOOTSTRAP" = "$GOROOT" ]; then
 	exit 1
 fi
 rm -f cmd/dist/dist
+# 编译发布程序
 GOROOT="$GOROOT_BOOTSTRAP" GOOS="" GOARCH="" "$GOROOT_BOOTSTRAP/bin/go" build -o cmd/dist/dist ./cmd/dist
 
+# 设置新的go运行环境的环境变量
 # -e doesn't propagate out of eval, so check success by hand.
 eval $(./cmd/dist/dist env -p || echo FAIL=true)
 if [ "$FAIL" = true ]; then
@@ -193,6 +195,7 @@ fi
 # Run dist bootstrap to complete make.bash.
 # Bootstrap installs a proper cmd/dist, built with the new toolchain.
 # Throw ours, built with Go 1.4, away after bootstrap.
+# 重新引导编译go环境
 ./cmd/dist/dist bootstrap $buildall $vflag $GO_DISTFLAGS "$@"
 rm -f ./cmd/dist/dist
 
